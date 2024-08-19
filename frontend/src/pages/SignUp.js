@@ -15,7 +15,7 @@ const SignUp = () => {
     password: "",
     name: "",
     confirmPassword: "",
-    profilePic: ""
+    profilePic: "",
   });
 
   const handleOnChange = (e) => {
@@ -33,7 +33,13 @@ const SignUp = () => {
     const file = e.target.files[0]
 
     const imagePic = await imageTobase64(file)
-    console.log('imagePic', imagePic)
+    
+    setData((preve) => {
+      return{
+        ...preve,
+        profilePic : imagePic
+      }
+    })
   }
 
   const handleSubmit = (e) => {
@@ -48,7 +54,7 @@ const SignUp = () => {
       <div className="bg-white p-5 w-full max-w-sm mx-auto">
         <div className="w-20 h-20 mx-auto relative overflow-hidden rounded-full">
           <div>
-          <img src={loginIcons} alt="login icons" />
+          <img src={data.profilePic || loginIcons} alt="login icons" />
           </div>
         <form>
           <label>
@@ -68,6 +74,7 @@ const SignUp = () => {
                 type="text"
                 placeholder="enter your name"
                 onChange={handleOnChange}
+                required
                 name='name'
                 value={data.name}
                 className="w-full h-full outline-none bg-transparent"
@@ -82,6 +89,7 @@ const SignUp = () => {
                 type="email"
                 placeholder="enter email"
                 onChange={handleOnChange}
+                required
                 name='email'
                 value={data.email}
                 className="w-full h-full outline-none bg-transparent"
@@ -98,6 +106,7 @@ const SignUp = () => {
               value={data.password}
               name="password"
               onChange={handleOnChange}
+              required
               className="w-full h-full outline-none bg-transparent"
             />
             <div className="cursor-pointer text-xl" onClick={() => setShowPassword((preve) =>!preve)}>
@@ -124,6 +133,7 @@ const SignUp = () => {
               value={data.confirmPassword}
               name="confirmPassword"
               onChange={handleOnChange}
+              required
               className="w-full h-full outline-none bg-transparent"
             />
             <div className="cursor-pointer text-xl" onClick={() => setShowConfirmPassword((preve) =>!preve)}>
