@@ -32,6 +32,7 @@ try{
 
   const payload = {
     ...req.body,
+    role: "GENERAL",
     password: hashPassword
   }
 

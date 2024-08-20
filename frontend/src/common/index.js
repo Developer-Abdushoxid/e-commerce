@@ -4,6 +4,10 @@ const SumaryApi = {
     SignUP: {
         url: `${backendDomin}/api/signup`,
         method: "post"
+    },
+    signIn: {
+        url: `${backendDomin}/api/signin`,
+        method: "post"
     }
 }
 
