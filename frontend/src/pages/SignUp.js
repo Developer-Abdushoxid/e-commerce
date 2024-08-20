@@ -4,6 +4,8 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import imageTobase64 from "../helpers/imageTobase64";
+import SumaryApi from "../common";
+import { toast } from "react-toastify";
 
 
 
@@ -42,10 +44,31 @@ const SignUp = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
-  }
 
+    if(data.password === data.confirmPassword){
+      const dataResponse = await fetch(SumaryApi.SignUP.url,{
+        method: SumaryApi.SignUP.method,
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+
+      const dataApi = await dataResponse.json()
+
+      if(dataApi.success){
+        toast.success(dataApi.message)
+      }
+      if(dataApi.error){
+        toast.error(dataApi.message)
+      }
+    }else{
+      console.log("Please check password and confirm password")
+    }
+  }
+console.log("data login", data)
 
   return (
     <section id="signup">

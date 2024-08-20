@@ -6,10 +6,11 @@ import connectDB from "./config/db.js";
 import router from "./routes/index.js";
 
 const app = express();
-app.use(cors())
+app.use(cors());
+app.use(express.json());
 app.use("/api",router)
 
-const PORT = 8080 || process.env.PORT
+const PORT = process.env.PORT || 8080;
 connectDB().then(() =>{
     app.listen(PORT,()=>{
         console.log("connect to DB")
