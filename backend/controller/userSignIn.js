@@ -34,9 +34,10 @@ async function userSignInController(req,res){
             
             const tokenOption = {
               httpOnly: true,
-              secure: true
+              secure: true, // HTTPS ulanishlarda 'true' dan foydalaning, aks holda developmentda `false` ga o'zgartiring.
+              sameSite: 'Lax' // Cookie brauzerlarida ishlashini ta'minlash uchun
             }
-            res.cookie("token",token).json({
+            res.cookie("token",token,tokenOption).json({
               message: "Login successfully",
               data: token,
               success: true,
